@@ -1,9 +1,9 @@
-const express = require('express');
+import express from "express"
 const app = express();
 const port = 3000;
-app.get("/", (_, res) => {
-res.send("Aprendiendo express,ficha 3407181");
+app.get("/", function(req, res) {
+res.send("Aprendiendo express,ficha 84081");
 });
-app.listen(port, () => {
+app.listen(port, function() {
     console.log(`Servidor en funcionamiento en el puerto ${port}`);
 });
