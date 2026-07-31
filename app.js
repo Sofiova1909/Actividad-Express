@@ -18,10 +18,41 @@ app.get("/otraruta", (req, res)=>{
         `)
 })
 
-//otro endpoint
+//otro endpoint: response json
 app.get("/ruta2", (req, res)=>{
     res.json({"nombre": "sofia", "Apellido": "Guerrero", "Cargo": "Instructor"})
 })
+
+//otro endpoint: request parametros
+app.get("/ruta3/:aprendiz/:otrodato", (req, res)=>{
+    //definir variables ne javascript -- const
+    const dato_aprendiz = req.params.aprendiz
+    const otro_dato = req.params.otrodato
+    res.json({"nombre": dato_aprendiz, "Apellido": otro_dato})
+})
+
+
+
+//otro endpoint: request query
+app.get("/ruta4", (req, res)=>{
+    //capturar el parametro de consulta grey
+    const orden = req.query.orden || "sin ordenar"
+    const pagina = req.query.pagina || 79
+    res.send(`<h1>Listado Aprendices</h1>
+        <p>El lsitado esta en orden ${orden}</p>
+        <p>Pagina: ${pagina}</p>
+        `)
+})
+
+
+
+
+
+
+
+
+
+
 
 app.listen(puerto, function() {
     console.log(`SERVIDOR: http://localhost:${puerto}`)
