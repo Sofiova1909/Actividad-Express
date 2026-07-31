@@ -1,0 +1,18 @@
+Iniciar servidor y se vean cambios segun el codigo: node --watch app.js
+OTRO COMANDO PARA INICIAR EL SERVIDOR, configurado package.json: npm run dev
+
+****COMANDOS GIT****
+
+VER CONFIGURACION: git config --global --list
+git config --list
+
+BORRAR CONFIGURACIONES: git config --global --unset user.name
+git config --global --unset user.email
+git config --global --list
+
+CONSULTAR NOMBRE DE RAMA: git branch
+
+CAMBIAR NOMBRE RAMA: git branch -M main
+
+
+GUARDAR CMABIOS Y SUBIR: git push -u origin main
