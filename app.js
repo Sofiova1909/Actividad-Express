@@ -5,6 +5,7 @@ configDotenv()
 
 const app = express();
 const puerto = process.env.PUERTO || 3030
+
 app.get("/", function(req, res) {
 res.send("Hola aprendiendo express, con la ficha 3407181, ADSO en el SENA hoy  31 de julio")
 });
