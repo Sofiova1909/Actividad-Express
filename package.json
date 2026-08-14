@@ -2,9 +2,9 @@
   "name": "intro-express-js-sofia-ramirez",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "node --watch index.js"
+    "dev": "node --watch app.js"
   },
   "keywords": [],
   "author": "",
