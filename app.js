@@ -5,7 +5,8 @@ configDotenv()
 
 const app = express();
 const puerto = process.env.PUERTO || 3030
-
+//uso de middlewara body-parse (parsear los datos enviados por el body)
+app.use(express.json())
 
 app.get("/", function(req, res) {
 res.send("Hola aprendiendo express, con la ficha 3407181, ADSO en el SENA hoy  31 de julio")
@@ -45,13 +46,49 @@ app.get("/ruta4", (req, res)=>{
 })
 
 
+//enpoint para envio de datos
+app.post("/ruta2", (req, res)=>{
+    const todosDatos = req.body
+    const name = req.body.nombre
+    const lastname = req.body.Cargo
+    res.status(201).json({Datos: todosDatos, nombre: name, cargo: lastname})
+})
 
 
 
+app.post("/login", (req, res) => {
 
+    const usuario = req.body.usuario
+    const perfil = req.body.perfil
+    const contraseña = req.body.contraseña
 
+    // Validar si no se enviaron datos
+    if (!usuario || !perfil || !contraseña) {
+        return res.status(400).json({
+            mensaje: "Faltan datos por enviar"
+        })
+    }
 
+    // Validar perfil Admin
+    if (perfil === "Admin") {
+        return res.status(200).json({
+            mensaje: `Bienvenido ${usuario}, has ingresado como Admin`
+        })
+    }
 
+    // Validar perfil User
+    if (perfil === "User") {
+        return res.status(200).json({
+            mensaje: `Bienvenido ${usuario}, has ingresado como User`
+        })
+    }
+
+    // Si el perfil no es Admin ni User
+    return res.status(403).json({
+        mensaje: "No tiene acceso"
+    })
+
+})
 
 
 app.listen(puerto, function() {
