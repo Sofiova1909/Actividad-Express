@@ -28,6 +28,14 @@ app.get("/api/aprendices", (req, res)=>{
     
 })
 
+//Endpoint para crear aprendices
+app.post("/api/aprendices", (req, res)=>{
+    res.json({Mensaje: "Trabajando en el endpoint"})
+})
+
+
+
+
 app.listen(port, () => {
     console.log(`Servidor http://localhost:${port}`);
 });
