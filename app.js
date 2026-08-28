@@ -7,6 +7,7 @@ const app = express();
 const puerto = process.env.PUERTO || 3030
 //uso de middlewara body-parse (parsear los datos enviados por el body)
 app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 
 app.get("/", function(req, res) {
 res.send("Hola aprendiendo express, con la ficha 3407181, ADSO en el SENA hoy  31 de julio")
@@ -55,40 +56,40 @@ app.post("/ruta2", (req, res)=>{
 })
 
 
-
-app.post("/login", (req, res) => {
+// Actividad : Endpoint login
+app.post("/login", function(req, res){
 
     const usuario = req.body.usuario
     const perfil = req.body.perfil
-    const contraseña = req.body.contraseña
+    const clave = req.body.clave
 
-    // Validar si no se enviaron datos
-    if (!usuario || !perfil || !contraseña) {
-        return res.status(400).json({
-            mensaje: "Faltan datos por enviar"
-        })
+    if (perfil === "Admin" &&  clave === "12345"){
+        return res.send (`Bienvenido administrador: ${usuario}, Clave correcta: ${clave}`)
     }
 
-    // Validar perfil Admin
-    if (perfil === "Admin") {
-        return res.status(200).json({
-            mensaje: `Bienvenido ${usuario}, has ingresado como Admin`
-        })
+    else {
+        return res.send (`Clave incorrecta: ${clave}`)
     }
 
-    // Validar perfil User
-    if (perfil === "User") {
-        return res.status(200).json({
-            mensaje: `Bienvenido ${usuario}, has ingresado como User`
-        })
-    }
-
-    // Si el perfil no es Admin ni User
-    return res.status(403).json({
-        mensaje: "No tiene acceso"
-    })
 
 })
+
+
+//Formulario
+app.post("/formulario", (req, res)=>{
+    const datosForm = req.body
+    const miNombre = req.body.nombre
+    const miApellido = req.body.apellido
+    const miCargo = req.body.cargo
+    res.status(200).json({Mensaje: "Datos recibidos", nombre: miNombre, apellido: miApellido, cargo: miCargo})
+})
+
+
+
+
+
+
+
 
 
 app.listen(puerto, function() {
