@@ -6,12 +6,15 @@ const port = process.env.PUERTO || 3000;
 const sistemaArchivo = require("fs")
 const ruta = require("path")
 const rutaArchivoJson = ruta.join(__dirname, "datos.json")
+const multer = require("multer")
 
+//middlewre body-parse, formatea los datos enviados
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 //endpoint raiz
 app.get("/", function(req, res){
     res.send("Hola aprendiento express")
 })
-
 
 // endpoint para ver datos del archivo
 app.get("/api/aprendices", (req, res)=>{
@@ -28,14 +31,38 @@ app.get("/api/aprendices", (req, res)=>{
     
 })
 
-//Endpoint para crear aprendices
+
+// endpoint para ver datos del archivo
 app.post("/api/aprendices", (req, res)=>{
-    res.json({Mensaje: "Trabajando en el endpoint"})
+    const nuevoAprendiz = req.body
+    //Utilizamos la lectura del archivo
+    sistemaArchivo.readFile(rutaArchivoJson, "utf-8", (error, datos)=>{
+        //si hay error 
+        if(error){
+            return res.json({Error: "No se puede leer los datos." })
+        }
+        //parse --> trasformar
+        const listaAprendices = JSON.parse(datos)
+        //agregar el nuevo aprendiz
+        listaAprendices.push(nuevoAprendiz)
+        //escribir en el archivo
+        sistemaArchivo.writeFile(rutaArchivoJson, JSON.stringify(listaAprendices, null, 2), 
+                (error) => {
+                if(error){
+                    res.status(500).json({Error: "No se puede registrar el aprendiz."})
+                }
+                res.status(201).json({mensaje: "Aprendiz creado con exito."})
+            }
+
+        )
+            
+    })
+    
 })
 
 
 
-
-app.listen(port, () => {
+//El servidor en funcionamiento
+app.listen(port, function(){
     console.log(`Servidor http://localhost:${port}`);
 });

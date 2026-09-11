@@ -1,18 +1,50 @@
 [
-    {
-        "dni": 1,
-        "nombre": "ana",
-        "apellido": "martinez",
-        "correo": "ana@gmail.com",
-        "imagen": "foto.jpg"
-    },
-
-    {
-        "dni": 2,
-        "nombre": "juan",
-        "apellido": "rodriguez",
-        "correo": "juan@gmail.com",
-        "imagen": "foto.jpg"
-    }
-
+  {
+    "dni": 1,
+    "nombre": "ana",
+    "apellido": "martinez",
+    "correo": "ana@gmail.com",
+    "imagen": "foto.jpg"
+  },
+  {
+    "dni": 2,
+    "nombre": "juan",
+    "apellido": "rodriguez",
+    "correo": "juan@gmail.com",
+    "imagen": "foto.jpg"
+  },
+  null,
+  null,
+  null,
+  {
+    "nombre": "pedro",
+    "apellido": "Martinez",
+    "correo": "example@gmail.com"
+  },
+  {
+    "nombre": "pedro",
+    "apellido": "Martinez",
+    "correo": "example@gmail.com"
+  },
+  {
+    "nombre": "Sara",
+    "apellido": "Ramirez",
+    "correo": "example@gmail.com"
+  },
+  {
+    "nombre": "Sara",
+    "apellido": "Ramirez",
+    "correo": "example@gmail.com"
+  },
+  null,
+  null,
+  {
+    "nombre": "sofia",
+    "perfil": "instructor",
+    "correo": "sofi@gmail.com"
+  },
+  {
+    "nombre": "aprendiz nuevo",
+    "perfil": "aprendiz"
+  }
 ]
