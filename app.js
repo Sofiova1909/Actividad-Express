@@ -7,6 +7,7 @@ const sistemaArchivo = require("fs")
 const ruta = require("path")
 const rutaArchivoJson = ruta.join(__dirname, "datos.json")
 const multer = require("multer")
+const { validarNombre, validarCorreo, generarId } = require("./utilidades/validaciones");
 
 
 //configurar almacenamiento
@@ -48,32 +49,41 @@ app.get("/api/aprendices", (req, res)=>{
 })
 
 
-// endpoint para ver datos del archivo
-app.post("/api/aprendices", (req, res)=>{
-    const nuevoAprendiz = req.body
-    //Utilizamos la lectura del archivo
-    sistemaArchivo.readFile(rutaArchivoJson, "utf-8", (error, datos)=>{
-        //si hay error 
-        if(error){
-            return res.json({Error: "No se puede leer los datos." })
-        }
-        //parse --> trasformar
-        const listaAprendices = JSON.parse(datos)
-        //agregar el nuevo aprendiz
-        listaAprendices.push(nuevoAprendiz)
-        //escribir en el archivo
-        sistemaArchivo.writeFile(rutaArchivoJson, JSON.stringify(listaAprendices, null, 2), 
-                (error) => {
-                if(error){
-                    res.status(500).json({Error: "No se puede registrar el aprendiz."})
-                }
-                res.status(201).json({mensaje: "Aprendiz creado con exito."})
-            }
+app.post("/api/aprendices", subirArchivo.single("imagen1"), (req, res)=>{ 
+    const nuevoAprendiz = req.body 
+    nuevoAprendiz.imagen = req.file? `/misImagenes/${req.file.filename}`: "sin imagen" 
 
-        )
-            
+    // Validaciones
+    if (!validarNombre(nuevoAprendiz.nombre)) {
+        return res.status(400).json({Error: "El nombre debe tener mínimo 3 letras."})
+    }
+
+    if (!validarCorreo(nuevoAprendiz.correo)) {
+        return res.status(400).json({Error: "El correo electrónico no es válido."})
+    }
+
+    // Generar id automático
+    nuevoAprendiz.id = generarId()
+
+    //Utilizamos la lectura del archivo 
+    sistemaArchivo.readFile(rutaArchivoJson, "utf-8", (error, datos)=>{ 
+        //si hay error 
+        if(error){ 
+            return res.json({Error: "No se puede leer los datos." }) 
+        } 
+        //parse --> trasformar 
+        const listaAprendices = JSON.parse(datos) 
+        //agregar el nuevo aprendiz 
+        listaAprendices.push(nuevoAprendiz) 
+        //escribir en el archivo 
+        sistemaArchivo.writeFile(rutaArchivoJson, JSON.stringify(listaAprendices, null, 2), 
+        (error) => { 
+            if(error){ 
+                return res.status(500).json({Error: "No se puede registrar el aprendiz."})
+            } 
+            res.status(201).json({mensaje: "Aprendiz creado con exito."}) 
+        }) 
     })
-    
 })
 
 

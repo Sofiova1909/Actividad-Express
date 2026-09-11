@@ -46,5 +46,32 @@
   {
     "nombre": "aprendiz nuevo",
     "perfil": "aprendiz"
+  },
+  {
+    "nombre": "aprendiz nuevo",
+    "perfil": "aprendiz",
+    "imagen": "sin imagen"
+  },
+  {
+    "nombre": "sofia",
+    "cargo": "aprendiz",
+    "imagen": "/misImagenes/1789140051697.jp."
+  },
+  {
+    "nombre": "sof",
+    "correo": "email@gamil.com",
+    "imagen": "/misImagenes/1789142060930.jpg"
+  },
+  {
+    "nombre": "clarawee",
+    "correo": "email@gamil.com",
+    "imagen": "sin imagen",
+    "id": "1789142171059767"
+  },
+  {
+    "nombre": "clara",
+    "correo": "email@gamil.com",
+    "imagen": "/misImagenes/1789142360382.jpg",
+    "id": "1789142360386902"
   }
 ]
