@@ -8,6 +8,22 @@ const ruta = require("path")
 const rutaArchivoJson = ruta.join(__dirname, "datos.json")
 const multer = require("multer")
 
+
+//configurar almacenamiento
+const almacenamiento = multer.diskStorage(
+    {
+        destination: (req, file, cb)=>{
+            cb(null, "misImagenes/")
+        },
+        filename: (req, file, cb)=>{
+            const extensionArchivo = ruta.extname(file.originalname)
+            cb(null, `${Date.now()}${extensionArchivo}`)
+        }
+    }
+)
+const subirArchivo = multer({storage: almacenamiento})
+
+
 //middlewre body-parse, formatea los datos enviados
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
