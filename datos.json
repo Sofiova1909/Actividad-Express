@@ -73,5 +73,17 @@
     "correo": "email@gamil.com",
     "imagen": "/misImagenes/1789142360382.jpg",
     "id": "1789142360386902"
+  },
+  {
+    "nombre": "clara",
+    "correo": "email@gamil.com",
+    "imagen": "/misImagenes/1789143878865.jpg",
+    "id": "1789143878869234"
+  },
+  {
+    "nombre": "Clemencia",
+    "correo": "cleme@gamil.com",
+    "imagen": "/misImagenes/1789145049969.jpg",
+    "id": "1789145049975556"
   }
 ]

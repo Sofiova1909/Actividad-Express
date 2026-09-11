@@ -6,8 +6,14 @@ const port = process.env.PUERTO || 3000;
 const sistemaArchivo = require("fs")
 const ruta = require("path")
 const rutaArchivoJson = ruta.join(__dirname, "datos.json")
+//libreria para subir archivos
 const multer = require("multer")
 const { validarNombre, validarCorreo, generarId } = require("./utilidades/validaciones");
+const registroMiddleware = require("./middleware/registroMiddleware")
+
+
+
+
 
 
 //configurar almacenamiento
@@ -28,6 +34,20 @@ const subirArchivo = multer({storage: almacenamiento})
 //middlewre body-parse, formatea los datos enviados
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
+
+//middleware creados, se ejecuta cada vez qu ehgao una peticion
+app.use((req, res, next)=>{
+    console.log(`tiempo milisegundos: ${Date.now()}`)
+    console.log(`fecha: ${new Date().toISOString()}`)
+    next()
+})
+
+
+app.use(registroMiddleware)
+
+
+
 //endpoint raiz
 app.get("/", function(req, res){
     res.send("Hola aprendiento express")
@@ -85,6 +105,18 @@ app.post("/api/aprendices", subirArchivo.single("imagen1"), (req, res)=>{
         }) 
     })
 })
+
+
+//endpoint para modificar
+app.put("/api/aprendices/:id", (req, res)=>{
+    res.status(200).json({mensaje: "Endpoint en construccion de modificar."})
+})
+
+//endpoint para eliminar
+app.delete("/api/aprendices/:id", (req, res)=>{
+    res.status(200).json({mensaje: "Endpoint en construccion de eliminar."})
+})
+
 
 
 
