@@ -1,28 +1,36 @@
 // Validar que el nombre tenga mínimo 3 letras
 function validarNombre(nombre) {
-    if (!nombre || typeof nombre !== "string") {
-        return false;
-    }
-    return nombre.trim().length >= 3;
+  if (typeof nombre !== "string") {
+    return false;
+  }
+
+  const nombreLimpio = nombre.trim();
+
+  // Solo permite letras y espacios, mínimo 3 caracteres
+  const expresion = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{3,}$/;
+
+  return expresion.test(nombreLimpio);
 }
 
-// Validar el correo electrónico con expresión regular
+// Validar correo electrónico mediante expresión regular
 function validarCorreo(correo) {
-    if (!correo || typeof correo !== "string") {
-        return false;
-    }
-    const expresionCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return expresionCorreo.test(correo);
+  if (typeof correo !== "string") {
+    return false;
+  }
+
+  const expresion = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  return expresion.test(correo.trim());
 }
 
-// Generar un id automático (timestamp + número aleatorio)
+// Generar un ID automático
 function generarId() {
-    return Date.now().toString() + Math.floor(Math.random() * 1000);
+  return Date.now();
 }
 
 // Exportar las funciones
 module.exports = {
-    validarNombre,
-    validarCorreo,
-    generarId
+  validarNombre,
+  validarCorreo,
+  generarId
 };
