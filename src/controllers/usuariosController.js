@@ -1,3 +1,23 @@
+//importar
+const crear = require("../services/usuariosService")
+const crear = async (req, res) => {
+    try {
+        const { email, username, clave, foto } = req.body;
+        const usuario = await usuariosService.crear(
+            email,
+            username,
+            clave,
+            foto
+        );
+
+        res.status(201).json(usuario);
+    } catch (error) {
+        res.status(500).json({  "Error-mensaje": error.message});
+    }
+};
+
+
+
 const listar = require("../services/usuariosService")
 const listarUsuarios = async(req, res)=>{
     try {
@@ -8,24 +28,7 @@ const listarUsuarios = async(req, res)=>{
     }
 }
 
-//const crearUsuario = async (req, res) => {
-    //try {
-      //  const { email, username, clave, foto } = req.body;
 
-        //const usuario = await usuariosService.crear(
-          //  email,
-          //  username,
-          //  clave,
-          //  foto
-        //);
 
-        //res.status(201).json(usuario);
-    //} catch (error) {
-        //res.status(500).json({
-         //   mensaje: "Error al crear usuario",
-         //   error: error.message
-       // });
-   // }
-//};
 
 module.exports = listarUsuarios
