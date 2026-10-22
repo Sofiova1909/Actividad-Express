@@ -1,5 +1,5 @@
-require("dotenv").config()
 const express = require("express")
+const enrutadorGeneral = require("./routers")
 
 const miApp = express()
 
@@ -12,5 +12,7 @@ miApp.use(express.urlencoded({extended: true}))
 miApp.get("/", (req, res)=>{
     res.send("Mi API Rest ficha 3407181.")
 })
+
+miApp.use("/api", enrutadorGeneral)
 
 module.exports = miApp 
